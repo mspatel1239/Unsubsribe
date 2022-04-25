@@ -1,4 +1,30 @@
-<div>    
+
+ <script type="text/javascript">
+     
+     var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], region:'sk1'};
+ // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+ clevertap.account.push({"id": "WWW-WWW-WWRZ"});
+ (function () {
+         var wzrk = document.createElement('script');
+         wzrk.type = 'text/javascript';
+         wzrk.async = true;
+         wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+         var s = document.getElementsByTagName('script')[0];
+         s.parentNode.insertBefore(wzrk, s);
+  })();
+  
+  
+  clevertap.notificationCallback = function(msg){
+      //raise the notification viewed and clicked events in the callback
+      clevertap.raiseNotificationViewed();
+      var msg = msg;
+      console.log(JSON.stringify(msg));//your custom rendering implementation here
+      
+};
+  
+</script> 
+ </script>
+ <div>    
     <h4>I want to unsubscribe from future emails
     </h4>        
     <input type="text" id="email" /> 
@@ -23,11 +49,11 @@
         }
         var subscriptionGroups = profile.groups; // will be recvd only if withGroups passed true above
         $WZRK_WR.setSubscriptionGroups(subscriptionGroups); // Can also be set here and can be retrieved by calling `$WZRK_WR.getSubscriptionGroups` method
-         $WZRK_WR.setUpdatedCategoryLong(profile);
+        $WZRK_WR.setUpdatedCategoryLong(profile);
         displayGroups()
     }
   function displayGroups() {
-    //   Fetching groups
+    //   Fetchin groups
       var subscriptionGroups = $WZRK_WR.getSubscriptionGroups();
     //  Rendering groups in above html div
       var addList = document.getElementById('unsubscribe-groups');
