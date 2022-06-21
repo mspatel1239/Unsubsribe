@@ -1,6 +1,10 @@
 
- <script type="text/javascript">
-     
+<html>
+
+<head>
+    <title>Unsubscribe from email</title>
+
+<script type="text/javascript">
      var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], region:'sk1'};
  // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
  clevertap.account.push({"id": "W8W-897-865Z"});
@@ -12,18 +16,15 @@
          var s = document.getElementsByTagName('script')[0];
          s.parentNode.insertBefore(wzrk, s);
   })();
-  
-  
-  clevertap.notificationCallback = function(msg){
-      //raise the notification viewed and clicked events in the callback
-      clevertap.raiseNotificationViewed();
-      var msg = msg;
-      console.log(JSON.stringify(msg));//your custom rendering implementation here
-      
-};
-  
-</script> 
-<div> 
+</script>
+
+
+</head>
+
+<body>
+
+
+    <div>
         <h4>I want to unsubscribe from future emails</h4>
         <input type="text" id="email" readonly="readonly" />
         <br/><br/>
@@ -32,33 +33,42 @@
     </div>
 
 
-   <script> //Javascript
-// Should be true only if your server is url encoding the URL on unsubscribe landing page
-    var isReEncode = false
-    // on  page load, fetch the email id of the user.
-    window.onload = function() {
-        $WZRK_WR.getEmail(isReEncode);
-    };
-    // will be called after the email id of the user has been fetched
-    function wzrk_email_fetched(emailStr) {
-        document.getElementById("email").value = emailStr;
-    }
-    // will be called after the subscription preferences for the user have been updated
-    function wzrk_email_subscription(status) {
-        //status 0 : unsubscribed, status 1 : subscribed
-        // todo - you can show a success message to the user from here
-        var statusLabel = 'subscribed';
-        if (status == 0) {
-            statusLabel = 'unsubscribed';
+
+    <script>
+        // on  page load, fetch the email id of the user.
+        window.onload = function() {
+            $WZRK_WR.getEmail();
+        };
+
+        // will be called after the email id of the user has been fetched
+        function wzrk_email_fetched(emailStr) {
+            document.getElementById("email").value = emailStr;
         }
-        alert("You've been " + statusLabel);
-    }
-    // call this function to unsubscribe the user
-    function unsubscribe(isReEncode) {
-        $WZRK_WR.unSubEmail(isReEncode);
-    }
-    // call this function to resubscribe the user
-    function resubscribe(isReEncode) {
-        $WZRK_WR.subEmail(isReEncode);
-    }
-</script>
+
+        // will be called after the subscription preferences for the user have been updated
+        function wzrk_email_subscription(status) {
+            //status 0 : unsubscribed, status 1 : subscribed
+            // todo - you can show a success message to the user from here
+            var statusLabel = 'subscribed';
+            if (status == 0) {
+                statusLabel = 'unsubscribed';
+            }
+            alert("You've been " + statusLabel);
+
+        }
+
+        // call this function to unsubscribe the user
+        function unsubscribe() {
+            $WZRK_WR.unSubEmail();
+
+        }
+
+        // call this function to resubscribe the user
+        function resubscribe() {
+            $WZRK_WR.subEmail();
+        }
+    </script>
+
+</body>
+
+</html>
